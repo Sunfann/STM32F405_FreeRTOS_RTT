@@ -236,7 +236,7 @@
 #include "DEBUG_RTT.h"
 
 
-//uint32_t PC13_State = 0;
+volatile uint32_t PC13_State = 0;
 
 void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName)
 {
@@ -305,7 +305,7 @@ void vTaskLed(void *pvParameters)
 		{
 				startTime = xTaskGetTickCount();
         GPIO_ToggleBits(GPIOC, GPIO_Pin_13);
-				//PC13_State = (GPIOC->ODR & GPIO_Pin_13) ? 1 : 0;
+				PC13_State = (GPIOC->ODR & GPIO_Pin_13) ? 1 : 0;
 				//DBG_WRITE(PC13_State);
 				vTaskDelay(pdMS_TO_TICKS(1000));
 				endTime = xTaskGetTickCount();
